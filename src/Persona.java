@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public abstract class Persona {
 public String documento;
 public String nombreCompleto;
@@ -9,6 +11,9 @@ public String telefono;
        this.nombreCompleto= nombreCompleto;
        this.correo = correo;
        this.telefono = telefono;
+    }
+
+    public Persona() {
     }
 
     public String getDocumento() {
@@ -50,5 +55,9 @@ public String telefono;
                 ", nombreCompleto='" + nombreCompleto + '\'' +
                 ", correo='" + correo + '\'' +
                 ", telefono='" + telefono + '\'';
+    }
+
+    public ArrayList<Venta> getVentas() {
+        return null;
     }
 }

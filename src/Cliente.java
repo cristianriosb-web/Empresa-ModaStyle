@@ -14,7 +14,11 @@ public class Cliente extends Persona {
         this.compras = new ArrayList<>();
     }
 
-    public double calcularDescuento() {
+    public Cliente(String docCliente, String nomCliente, String correoCliente, String telCliente) {
+        super();
+    }
+
+    public double calcularDescuento(double valorAntesDescuento) {
         return categoria.getDescuento();
     }
 

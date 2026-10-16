@@ -96,7 +96,7 @@
                         Cliente cliente = new Cliente(docCliente, nomCliente, correoCliente, telCliente);
 
                         System.out.print("Ingrese el código de afiliación: ");
-                        cliente.setCodigoAfliacion(sc.nextLine());
+                        cliente.setCodigoAfiliacion(sc.nextLine());
 
                         cliente.setCategoria(pedirCategoriaCliente(sc));
 
@@ -209,6 +209,7 @@
 
                     // ============= 7. Registrar Venta =============
                     case 7:
+                        sc.nextLine();
                         System.out.println("----- Registrar Venta -----");
                         System.out.print("Ingrese el código de la sucursal donde se efectúa la venta: ");
                         Sucursal sucVenta = empresa.buscarSucursal(sc.nextLine());
@@ -275,7 +276,7 @@
 
                         // Confirmar venta
                         if (venta.confirmar()) {
-                            empresa.getListaVentas().add(venta);
+                            empresa.getVentas().add(venta);
                             vendedorVenta.agregarVenta(venta);
                             System.out.println("¡Venta confirmada exitosamente! Valor total a pagar: $" + venta.calcularTotal());
                         } else {
@@ -300,26 +301,31 @@
                         break;
 
                     // ============= 9. Consultar Ventas de un Vendedor =============
+                    // ============= 9. Consultar Ventas de un Vendedor =============
                     case 9:
                         System.out.println("----- Ventas por Vendedor -----");
-                        System.out.print("Ingrese el documento del vendedor: ");
+                        System.out.println("Ingrese el documento del vendedor: ");
                         String docVendDoc = sc.nextLine();
-                        ArrayList<Venta> ventasVend = empresa.VentasPorVendedor(docVendDoc);
-                        if (ventasVend.isEmpty()) {
-                            System.out.println("El vendedor no registra ventas.");
-                        } else {
+
+                        ArrayList<Venta> ventasVend = empresa.consultarVentasVendedor(docVendDoc);
+
+                        if (ventasVend != null && !ventasVend.isEmpty()) {
                             for (Venta v : ventasVend) {
                                 System.out.println("Venta Código: " + v.getCodigo() + " | Fecha: " + v.getFecha() + " | Total: $" + v.calcularTotal());
                             }
+                        } else {
+                            System.out.println("El vendedor no registra ventas o no existe.");
                         }
                         break;
+
+
 
                     // ============= 10. Consultar Compras de un Cliente =============
                     case 10:
                         System.out.println("----- Compras por Cliente -----");
                         System.out.print("Ingrese el documento del cliente: ");
                         String docCliDoc = sc.nextLine();
-                        ArrayList<Venta> comprasCli = empresa.ComprasPorCliente(docCliDoc);
+                        ArrayList<Venta> comprasCli = empresa.consultarComprasCliente(docCliDoc);
                         if (comprasCli.isEmpty()) {
                             System.out.println("El cliente no registra compras.");
                         } else {

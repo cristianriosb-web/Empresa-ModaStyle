@@ -129,7 +129,7 @@ public class Venta {
         for (DetalleVenta detalle : detalles) {
             Inventario inventario = detalle.getInventario();
 
-            inventario.descontarExistencias(detalle.getCantidad());
+            inventario.descontar(detalle.getCantidad());
             inventario.agregarDetalle(detalle);
         }
         this.confirmada = true;

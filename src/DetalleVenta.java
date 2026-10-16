@@ -13,9 +13,13 @@ public class DetalleVenta {
         this.subtotal = calcularSubtotal();
     }
 
+    public DetalleVenta(int cantDetalle, double v, Venta venta, Inventario invDetalle) {
+    }
+
     public double calcularPrecioUnitarioFinal() {
         double precioConRecargo = inventario.getPrenda().calcularPrecioConRecargo();
-        double descuento = venta.getCliente().calcularDescuento();
+        double valorAntesDescuento = 0;
+        double descuento = venta.getCliente().calcularDescuento(valorAntesDescuento);
         return precioConRecargo * (1 - descuento);
     }
 
@@ -71,5 +75,9 @@ public class DetalleVenta {
                 + " | Color: " + inventario.getColor() + " | Cantidad: " + cantidad
                 + " | Precio unitario final: " + String.format("%.2f", precioUnitarioFinal)
                 + " | Subtotal: " + String.format("%.2f", subtotal);
+    }
+
+    public Prenda getPrenda() {
+        return inventario.getPrenda();
     }
 }
