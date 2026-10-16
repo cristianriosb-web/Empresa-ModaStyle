@@ -318,20 +318,20 @@
                         }
                         break;
 
-
-
                     // ============= 10. Consultar Compras de un Cliente =============
                     case 10:
                         System.out.println("----- Compras por Cliente -----");
                         System.out.print("Ingrese el documento del cliente: ");
                         String docCliDoc = sc.nextLine();
+
                         ArrayList<Venta> comprasCli = empresa.consultarComprasCliente(docCliDoc);
-                        if (comprasCli.isEmpty()) {
-                            System.out.println("El cliente no registra compras.");
-                        } else {
+
+                        if (comprasCli != null && !comprasCli.isEmpty()) {
                             for (Venta v : comprasCli) {
-                                System.out.println("Compra Código: " + v.getCodigo() + " | Fecha: " + v.getFecha() + " | Sucursal: " + v.getSucursal().getNombre() + " | Total: $" + v.calcularTotal());
+                                System.out.println("Compra Código: " + v.getCodigo() + " | Fecha: " + v.getFecha() + " | Sucursal: " + v.getSucursal().getNombre());
                             }
+                        } else {
+                            System.out.println("El cliente no registra compras o no existe.");
                         }
                         break;
 
@@ -403,5 +403,8 @@
                 default -> CategoriaCliente.BRONCE;
             };
         }
+
+
+
      }
 

@@ -150,11 +150,21 @@ public class Empresa {
     }
 
     public ArrayList<Venta> consultarComprasCliente(String documento) {
-        Cliente cliente = buscarCliente(documento);
-        if (cliente == null) {
-            return null;
+        ArrayList<Venta> comprasEncontradas = new ArrayList<>();
+
+        if (documento == null || documento.isBlank()) {
+            return comprasEncontradas; // Retorna la lista vacía [] en lugar de null
         }
-        return cliente.getCompras();
+
+        for (Venta venta : ventas) { // O la lista de ventas que manejes
+            if (venta != null && venta.getCliente() != null) {
+                if (venta.getCliente().getDocumento().equalsIgnoreCase(documento.trim())) {
+                    comprasEncontradas.add(venta);
+                }
+            }
+        }
+
+        return comprasEncontradas; // Devuelve [] si no encontró ninguna
     }
 
     public double calcularIngresosSucursal(String codigo) {
